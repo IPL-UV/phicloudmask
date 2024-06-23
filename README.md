@@ -7,6 +7,13 @@ hf: https://huggingface.co/aliFrancis/SEnSeIv2
 
 The code of Francis was quite hard to understand, so I decided to rewrite it in a more pythonic way. I think we can use this code to start to build our own model.
 
+# Installation
+
+```bash
+pip install phicloudmask
+```
+
+# Usage
 
 Load the data and weights:
 
