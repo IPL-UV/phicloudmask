@@ -1,7 +1,9 @@
 # phicloudmask
 
 paper: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10505181
+
 repo: https://github.com/aliFrancis/SEnSeIv2
+
 hf: https://huggingface.co/aliFrancis/SEnSeIv2
 
 
@@ -67,7 +69,7 @@ with torch.no_grad():
     image = torch.from_numpy(array_demo[None]).float().to("cuda")
     cloud_probs_all = model(image)
     cloud_mask_all = cloud_probs_all.argmax(dim=0).cpu().numpy()
-    cloud_4class_all = np.vectorize(cloudsen12_style)(cloud_mask_all)
+    cloud_4class_all = np.vectorize(map_values)(cloud_mask_all)
 ```
 
 Predict for RGB bands
@@ -92,7 +94,7 @@ with torch.no_grad():
     image = torch.from_numpy(array_demo[[3, 2, 1]][None]).float().to("cuda")
     cloud_probs_rgb = model(image)
     cloud_mask_rgb = cloud_probs_rgb.argmax(dim=0).cpu().numpy()
-    cloud_4class_rgb = np.vectorize(cloudsen12_style)(cloud_mask_rgb)
+    cloud_4class_rgb = np.vectorize(map_values)(cloud_mask_rgb)
 ```
 
 Check the results
@@ -112,4 +114,5 @@ axes[3].imshow(cloud_4class_rgb)
 axes[3].set_title("RGB Bands Mask - phiCloudMask")
 plt.show()
 ```
+![image](https://github.com/IPL-UV/phicloudmask/assets/16768318/e2cb90b9-da4a-43b2-974c-ebbd849fd1f8)
 
