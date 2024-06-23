@@ -42,7 +42,7 @@ class GlobalStats(torch.nn.Module):
         batch_size, num_bands, _, _ = bands.shape
         num_percentiles = len(self.percentiles)
         stats = torch.zeros(
-            (batch_size, num_bands, num_percentiles), device=self.device
+            (batch_size, num_bands, num_percentiles), device=bands.device
         )
 
         # Reshape bands for percentile calculation

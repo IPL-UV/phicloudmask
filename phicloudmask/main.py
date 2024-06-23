@@ -23,7 +23,8 @@ class CloudMask(torch.nn.Module):
 
         # Define the embedding model
         self.embedding_model = SpectralEmbedding(
-            in_features=74
+            in_features=74,
+            device=device
         )
 
         # Define the cloud mask model
@@ -35,22 +36,18 @@ class CloudMask(torch.nn.Module):
 
         # to device
         self.embedding_model.to(device)
-        self.eval()
-
         self.cloud_model.to(device)
-        self.eval()
-
 
     def forward(self, img: torch.Tensor):
-        # Embed the input image
-        band_descriptor = self.band_descriptor.to(self.device)
+        # Embed the input image translate to the image device
+        band_descriptor = self.band_descriptor.to(self.device).clone()
         embedding = self.embedding_model(img, band_descriptor)
-
+        
         # Forward pass through the cloud mask model
         cloud_probs = self.cloud_model(embedding).logits
         
         # Interpolate the mask to the original image size
         resampled = torch.nn.functional.interpolate(cloud_probs, img.shape[2:], mode='bilinear', antialias=True)
-        outputs = torch.nn.functional.softmax(cloud_probs, dim=1).squeeze()
+        outputs = torch.nn.functional.softmax(resampled, dim=1).squeeze()
         
         return outputs

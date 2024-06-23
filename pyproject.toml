@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "phicloudmask"
-version = "0.0.1"
-description = "Sensor Independent Cloud and Shadow Masking with Ambiguous Labels and Multimodal Inputs"
+version = "0.0.2"
+description = "Universal Cloud Mask Detector for Optical Remote Sensing Imagery"
 authors = ["Cesar Aybar <fcesar.aybar@uv.es>"]
 repository = "https://github.com/csaybar/phicloudmask"
 documentation = "https://csaybar.github.io/phicloudmask/"
@@ -15,6 +15,7 @@ python = ">=3.9,<4.0"
 transformers = ">=4.41.2"
 torch = ">=2.0.0"
 numpy = ">=1.25.2"
+einops = ">=0.8.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
