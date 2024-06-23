@@ -44,10 +44,6 @@ cloudmask_weights = torch.load(weights_folder / "cloudmask_weights.pt")
 with open(weights_folder / "demo.pkl", "rb") as f:
     dict_demo = pickle.load(f)
 
-# Load a sample image
-with open(weights_folder / "demo.pkl", "rb") as f:
-    dict_demo = pickle.load(f)
-
     # S2 L1C image
     array_demo = dict_demo["s2"][:, 0:512, 0:512]
     
