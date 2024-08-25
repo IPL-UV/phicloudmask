@@ -1,133 +1,89 @@
-# Contributing to `phicloudmask`
+# **Contributing to `phicloudmask`** 🤝
 
-Contributions are welcome, and they are greatly appreciated!
-Every little bit helps, and credit will always be given.
+We welcome contributions from the community! Every contribution, no matter how small, is appreciated and credited. Here’s how you can get involved:
 
-You can contribute in many ways:
+## **How to contribute** 🛠️
 
-# Types of Contributions
+1. **Fork the repository:** Start by forking the [phicloudmask](https://github.com/IPL-UV/phicloudmask) repository to your GitHub account. 🍴
 
-## Report Bugs
+2. **Clone your fork locally:**
 
-Report bugs at https://github.com/csaybar/phicloudmask/issues
+    ```bash
+    cd <directory_in_which_repo_should_be_created>
+    git clone https://github.com/YOUR_GITHUB_USERNAME/phicloudmask.git
+    cd phicloudmask
+    ```
 
-If you are reporting a bug, please include:
+3. **Set up your local environment:** 🌱
 
-- Your operating system name and version.
-- Any details about your local setup that might be helpful in troubleshooting.
-- Detailed steps to reproduce the bug.
+   - If you're using `pyenv`, select a Python version:
+     ```bash
+     pyenv local <x.y.z>
+     ```
+   - Install dependencies and activate the environment:
+     ```bash
+     poetry install
+     poetry shell
+     ```
+   - Install pre-commit hooks:
+     ```bash
+     poetry run pre-commit install
+     ```
 
-## Fix Bugs
+4. **Create a branch for your changes:** 🖋️
 
-Look through the GitHub issues for bugs.
-Anything tagged with "bug" and "help wanted" is open to whoever wants to implement a fix for it.
+    ```bash
+    git checkout -b name-of-your-bugfix-or-feature
+    ```
 
-## Implement Features
+5. **Make your changes:** Develop your feature or fix, ensuring to write clear, concise commit messages and include any necessary tests.
 
-Look through the GitHub issues for features.
-Anything tagged with "enhancement" and "help wanted" is open to whoever wants to implement it.
+6. **Run checks on your changes:** ✅
 
-## Write Documentation
+   - Run formatting checks:
+     ```bash
+     make check
+     ```
+   - Run unit tests:
+     ```bash
+     make test
+     ```
+   - Optionally, run tests across different Python versions using tox:
+     ```bash
+     tox
+     ```
 
-Cookiecutter PyPackage could always use more documentation, whether as part of the official docs, in docstrings, or even on the web in blog posts, articles, and such.
+7. **Commit your changes and push your branch:** 🚀
 
-## Submit Feedback
+    ```bash
+    git add .
+    git commit -m "Your detailed description of your changes."
+    git push origin name-of-your-bugfix-or-feature
+    ```
 
-The best way to send feedback is to file an issue at https://github.com/csaybar/phicloudmask/issues.
+8. **Submit a pull request:** Go to your repository on GitHub and create a pull request to the `main` branch of the `phicloudmask` repository. Make sure your pull request meets the following guidelines:
 
-If you are proposing a new feature:
+   - Include tests for your changes.
+   - Update documentation if your pull request adds functionality.
+   - Provide a detailed description of your changes.
 
-- Explain in detail how it would work.
-- Keep the scope as narrow as possible, to make it easier to implement.
-- Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
+## **Types of contributions** 📦
 
-# Get Started!
+- **Report Bugs:** 🐛 Report bugs by creating an issue on the [phicloudmask GitHub repository](https://github.com/IPL-UV/phicloudmask/issues). Please include:
+  - Your operating system name and version.
+  - Details about your local setup that might be helpful in troubleshooting.
+  - Detailed steps to reproduce the bug.
 
-Ready to contribute? Here's how to set up `phicloudmask` for local development.
-Please note this documentation assumes you already have `poetry` and `Git` installed and ready to go.
+- **Fix Bugs:** 🛠️ Look through the GitHub issues for bugs tagged with "bug" and "help wanted". These are open for anyone who wants to contribute a fix.
 
-1. Fork the `phicloudmask` repo on GitHub.
+- **Implement Features:** ✨ Help implement new features by checking issues tagged with "enhancement" and "help wanted".
 
-2. Clone your fork locally:
+- **Write Documentation:** 📚 `phicloudmask` can always benefit from improved documentation. You can contribute by enhancing the official documentation, writing clear docstrings, or even creating blog posts and tutorials.
 
-```bash
-cd <directory_in_which_repo_should_be_created>
-git clone git@github.com:YOUR_NAME/phicloudmask.git
-```
+- **Submit Feedback:** 💬 Propose new features or provide feedback by filing an issue on the [phicloudmask GitHub repository](https://github.com/IPL-UV/phicloudmask/issues).
+  - If you propose a new feature, please explain in detail how it would work and keep the scope narrow to make implementation easier.
+  - Remember that this is a community-driven project, and every bit of feedback is valuable!
 
-3. Now we need to install the environment. Navigate into the directory
+## **Get Started!** 🚀
 
-```bash
-cd phicloudmask
-```
-
-If you are using `pyenv`, select a version to use locally. (See installed versions with `pyenv versions`)
-
-```bash
-pyenv local <x.y.z>
-```
-
-Then, install and activate the environment with:
-
-```bash
-poetry install
-poetry shell
-```
-
-4. Install pre-commit to run linters/formatters at commit time:
-
-```bash
-poetry run pre-commit install
-```
-
-5. Create a branch for local development:
-
-```bash
-git checkout -b name-of-your-bugfix-or-feature
-```
-
-Now you can make your changes locally.
-
-6. Don't forget to add test cases for your added functionality to the `tests` directory.
-
-7. When you're done making changes, check that your changes pass the formatting tests.
-
-```bash
-make check
-```
-
-Now, validate that all unit tests are passing:
-
-```bash
-make test
-```
-
-9. Before raising a pull request you should also run tox.
-   This will run the tests across different versions of Python:
-
-```bash
-tox
-```
-
-This requires you to have multiple versions of python installed.
-This step is also triggered in the CI/CD pipeline, so you could also choose to skip this step locally.
-
-10. Commit your changes and push your branch to GitHub:
-
-```bash
-git add .
-git commit -m "Your detailed description of your changes."
-git push origin name-of-your-bugfix-or-feature
-```
-
-11. Submit a pull request through the GitHub website.
-
-# Pull Request Guidelines
-
-Before you submit a pull request, check that it meets these guidelines:
-
-1. The pull request should include tests.
-
-2. If the pull request adds functionality, the docs should be updated.
-   Put your new functionality into a function with a docstring, and add the feature to the list in `README.md`.
+Ready to contribute? Follow the steps above to set up `phicloudmask` for local development and start making your mark on the project. We’re excited to see what you’ll contribute!
