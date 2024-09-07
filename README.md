@@ -175,7 +175,9 @@ axes[3].imshow(cloud_4class_rgb)
 axes[3].set_title("RGB Bands Mask - phiCloudMask")
 plt.show()
 ```
-![image](https://github.com/IPL-UV/phicloudmask/assets/16768318/e2cb90b9-da4a-43b2-974c-ebbd849fd1f8)
+<p align="center">
+  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/phi1.png" width="100%">
+</p>
 
 ## **Additional information** ✔️
 
