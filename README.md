@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/banner_phi.png" width="100%">
+  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/banner_phicloudmask.png" width="43%">
 </p>
 
 <p align="center">
@@ -99,13 +99,13 @@ with open(weights_folder / "demo.pkl", "rb") as f:
     mask_demo = dict_demo["cloud_mask"][:, 0:512, 0:512]  # Original mask
 ```
 
-### Generate cloud masks ☁️
+### **Generate cloud masks** ☁️
 
 #### **Using all spectral bands** 🌈
 
 To generate cloud masks using all Sentinel-2 spectral bands:
 
--  **1. Initialize the model**:
+**1. Initialize the model:**
 
 ```python
 # Initialize the cloud mask model
@@ -114,7 +114,7 @@ model.embedding_model.load_state_dict(embedding_weights)
 model.cloud_model.load_state_dict(cloudmask_weights)
 model.eval()
 ```
--  **2. Generate cloud mask:**:
+**2. Generate cloud mask:**
 
 ```python
 with torch.no_grad():
@@ -128,7 +128,7 @@ with torch.no_grad():
 
 To generate cloud masks using only the RGB bands:
 
--  **1. Define RGB bands Descriptors**:
+**1. Define RGB bands descriptors:**
 
 ```python
 RGB_DESCRIPTORS = [
@@ -137,7 +137,7 @@ RGB_DESCRIPTORS = [
     {"band_type": "TOA Reflectance", "min_wavelength": 446.0, "max_wavelength": 542.0},
 ]
 ```
--  **2. Reinitialize the model for RGB**:
+**2. Reinitialize the model for RGB:**
 
 ```python
 model = CloudMask(descriptor=RGB_DESCRIPTORS, device="cuda")
@@ -146,7 +146,7 @@ model.cloud_model.load_state_dict(cloudmask_weights)
 model.eval()
 ```
 
--  **3. Generate cloud mask for RGB bands**:
+**3. Generate cloud mask for RGB bands:**
 
 ```python
 with torch.no_grad():

@@ -10,7 +10,7 @@ We welcome contributions from the community! Every contribution, no matter how s
 
     ```bash
     cd <directory_in_which_repo_should_be_created>
-    git clone https://github.com/YOUR_GITHUB_USERNAME/phicloudmask.git
+    git clone https://github.com/IPL-UV/phicloudmask.git
     cd phicloudmask
     ```
 
