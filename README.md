@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/banner_phicloudmask.png" width="43%">
+  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/banner_phicloudmask.png" width="39%">
 </p>
 
 <p align="center">
