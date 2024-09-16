@@ -43,6 +43,8 @@
     
       <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="docs/style/style.css">
+    
     <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -507,7 +509,7 @@
 
 <h1 id="_1"></h1>
 <p align="center">
-  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/banner_phi.png" width="100%">
+  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/banner_phicloudmask.png" width="39%">
 </p>
 
 <p align="center">
@@ -584,19 +586,17 @@
     <span class="n">array_demo</span> <span class="o">=</span> <span class="n">dict_demo</span><span class="p">[</span><span class="s2">&quot;s2&quot;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">512</span><span class="p">]</span>  <span class="c1"># S2 L1C image</span>
     <span class="n">mask_demo</span> <span class="o">=</span> <span class="n">dict_demo</span><span class="p">[</span><span class="s2">&quot;cloud_mask&quot;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">512</span><span class="p">]</span>  <span class="c1"># Original mask</span>
 </code></pre></div>
-<h3 id="generate-cloud-masks">Generate cloud masks ☁️</h3>
+<h3 id="generate-cloud-masks"><strong>Generate cloud masks</strong> ☁️</h3>
 <h4 id="using-all-spectral-bands"><strong>Using all spectral bands</strong> 🌈</h4>
 <p>To generate cloud masks using all Sentinel-2 spectral bands:</p>
-<ul>
-<li><strong>1. Initialize the model</strong>:</li>
-</ul>
+<p><strong>1. Initialize the model:</strong></p>
 <p><div class="highlight"><pre><span></span><code><span class="c1"># Initialize the cloud mask model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">CloudMask</span><span class="p">(</span><span class="n">descriptor</span><span class="o">=</span><span class="n">SENTINEL2_DESCRIPTORS</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">embedding_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">embedding_weights</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">cloud_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">cloudmask_weights</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 </code></pre></div>
--  <strong>2. Generate cloud mask:</strong>:</p>
+<strong>2. Generate cloud mask:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">array_demo</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
     <span class="n">cloud_probs_all</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -605,24 +605,20 @@
 </code></pre></div>
 <h4 id="using-rgb-bands-only"><strong>Using RGB bands only</strong> 🎨</h4>
 <p>To generate cloud masks using only the RGB bands:</p>
-<ul>
-<li><strong>1. Define RGB bands Descriptors</strong>:</li>
-</ul>
+<p><strong>1. Define RGB bands descriptors:</strong></p>
 <p><div class="highlight"><pre><span></span><code><span class="n">RGB_DESCRIPTORS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="s2">&quot;band_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOA Reflectance&quot;</span><span class="p">,</span> <span class="s2">&quot;min_wavelength&quot;</span><span class="p">:</span> <span class="mf">645.5</span><span class="p">,</span> <span class="s2">&quot;max_wavelength&quot;</span><span class="p">:</span> <span class="mf">684.5</span><span class="p">},</span>
     <span class="p">{</span><span class="s2">&quot;band_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOA Reflectance&quot;</span><span class="p">,</span> <span class="s2">&quot;min_wavelength&quot;</span><span class="p">:</span> <span class="mf">537.5</span><span class="p">,</span> <span class="s2">&quot;max_wavelength&quot;</span><span class="p">:</span> <span class="mf">582.5</span><span class="p">},</span>
     <span class="p">{</span><span class="s2">&quot;band_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOA Reflectance&quot;</span><span class="p">,</span> <span class="s2">&quot;min_wavelength&quot;</span><span class="p">:</span> <span class="mf">446.0</span><span class="p">,</span> <span class="s2">&quot;max_wavelength&quot;</span><span class="p">:</span> <span class="mf">542.0</span><span class="p">},</span>
 <span class="p">]</span>
 </code></pre></div>
--  <strong>2. Reinitialize the model for RGB</strong>:</p>
+<strong>2. Reinitialize the model for RGB:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">CloudMask</span><span class="p">(</span><span class="n">descriptor</span><span class="o">=</span><span class="n">RGB_DESCRIPTORS</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">embedding_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">embedding_weights</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">cloud_model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">cloudmask_weights</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 </code></pre></div>
-<ul>
-<li><strong>3. Generate cloud mask for RGB bands</strong>:</li>
-</ul>
+<p><strong>3. Generate cloud mask for RGB bands:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">array_demo</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]][</span><span class="kc">None</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
     <span class="n">cloud_probs_rgb</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -631,7 +627,7 @@
 </code></pre></div>
 <h3 id="visualize-the-results"><strong>Visualize the results</strong> 📊</h3>
 <p>To visualize the original RGB image, the ground truth mask, and the predicted cloud masks:</p>
-<p><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -645,7 +641,10 @@
 <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;RGB Bands Mask - phiCloudMask&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<img alt="image" src="https://github.com/IPL-UV/phicloudmask/assets/16768318/e2cb90b9-da4a-43b2-974c-ebbd849fd1f8" /></p>
+<p align="center">
+  <img src="https://huggingface.co/datasets/JulioContrerasH/DataMLSTAC/resolve/main/phi1.png" width="100%">
+</p>
+
 <h2 id="additional-information"><strong>Additional information</strong> ✔️</h2>
 <h3 id="understanding-the-model"><strong>Understanding the model</strong> 🧠</h3>
 <p>The <code>phiCloudMask</code> model leverages a pre-trained neural network architecture to predict cloud masks. It uses two main sets of weights:</p>
@@ -712,6 +711,8 @@
     
     
       <script src="assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      
+        <script src="docs/js/copybutton.js"></script>
       
     
   </body>
