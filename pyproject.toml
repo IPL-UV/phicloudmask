@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "phicloudmask"
-version = "0.0.2"
+version = "0.0.3"
 description = "Universal Cloud Mask Detector for Optical Remote Sensing Imagery"
 authors = ["Cesar Aybar <fcesar.aybar@uv.es>"]
 repository = "https://github.com/csaybar/phicloudmask"
